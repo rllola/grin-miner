@@ -20,7 +20,7 @@ WORKDIR /usr/src/grin-miner
 COPY . .
 
 # Building Grin miner
-RUN cargo build --release
+RUN cargo build
 
 # runtime stage
 FROM debian:9.4
@@ -33,10 +33,10 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
 
 ENV LANG en_US.UTF-8
 
-COPY --from=builder /usr/src/grin-miner/target/release/grin-miner /usr/local/bin/grin-miner
+COPY --from=builder /usr/src/grin-miner/target/debug/grin-miner /usr/local/bin/grin-miner
 COPY --from=builder /usr/src/grin-miner/grin-miner.toml /usr/src/grin-miner/grin-miner.toml
 
-WORKDIR /usr/src/grin
+WORKDIR /usr/src/grin-miner
 
 EXPOSE 13413
 EXPOSE 13414
