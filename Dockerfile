@@ -34,6 +34,7 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
 ENV LANG en_US.UTF-8
 
 COPY --from=builder /usr/src/grin-miner/target/debug/grin-miner /usr/local/bin/grin-miner
+COPY --from=builder /usr/src/grin-miner/target/debug/plugins /usr/src/grin-miner/plugins
 COPY --from=builder /usr/src/grin-miner/grin-miner.toml /usr/src/grin-miner/grin-miner.toml
 
 WORKDIR /usr/src/grin-miner
